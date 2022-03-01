@@ -5,11 +5,11 @@ import { LazyModuleLoader } from '@nestjs/core';
 import { firstValueFrom } from 'rxjs';
 import { ActionService } from './action.service';
 
-@Controller()
+@Controller('api')
 export class AppController {
   constructor(private lazyModuleLoader: LazyModuleLoader) {}
 
-  @Post()
+  @Post('action')
   async action(
     @Body() actionRequest: ActionRequest,
     @Res() response: Response,
