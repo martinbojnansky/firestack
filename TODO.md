@@ -1,4 +1,0 @@
-- remove nest e2e
-- add cypress
-- configure firebase
-- add frontend

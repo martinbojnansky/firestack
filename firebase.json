@@ -9,5 +9,16 @@
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "emulators": {
+    "ui": {
+      "port": "4201"
+    },
+    "functions": {
+      "port": "4202"
+    },
+    "firestore": {
+      "port": "4203"
+    }
   }
 }

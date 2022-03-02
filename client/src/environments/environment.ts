@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  actionsUrl: 'http://localhost:5001/firestack-dev/us-central1/api/api/action',
+  actionsUrl: 'http://localhost:4202/firestack-dev/us-central1/api/action',
 };
 
 /*

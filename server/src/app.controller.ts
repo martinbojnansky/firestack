@@ -1,11 +1,11 @@
+import { ActionRequest } from '@api/actions';
 import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
-import { ActionRequest } from '../../api/actions';
-import { Response } from 'express';
 import { LazyModuleLoader } from '@nestjs/core';
+import { Response } from 'express';
 import { firstValueFrom } from 'rxjs';
 import { ActionService } from './action.service';
 
-@Controller('api')
+@Controller()
 export class AppController {
   constructor(private lazyModuleLoader: LazyModuleLoader) {}
 

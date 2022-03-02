@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { from } from 'rxjs';
+import { BehaviorSubject, from, switchMap, tap } from 'rxjs';
 import { ActionService } from './action.service';
 
 @Component({
@@ -10,10 +10,19 @@ import { ActionService } from './action.service';
 export class AppComponent {
   title = 'firestack';
 
+  readonly reloadRequired$ = new BehaviorSubject(true);
+
+  readonly logs$ = this.reloadRequired$.pipe(
+    switchMap(() => from(this.actionService.invoke('getLogs')())),
+  );
+
   constructor(private actionService: ActionService) {}
 
-  readonly all$ = from(this.actionService.invoke('getLogs')());
-  readonly create$ = from(
-    this.actionService.invoke('createLog')({ message: new Date().toString() }),
-  );
+  createLog() {
+    return from(
+      this.actionService.invoke('createLog')({
+        message: new Date().toString(),
+      }),
+    ).pipe(tap(() => this.reloadRequired$.next(true)));
+  }
 }

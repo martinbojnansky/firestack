@@ -1,7 +1,7 @@
 import { getFirestore } from 'firebase-admin/firestore';
 
 export class FirebaseService {
-  readonly db = getFirestore();
+  protected readonly db = getFirestore();
 
-  constructor() {}
+  readonly logs = this.db.collection('logs');
 }

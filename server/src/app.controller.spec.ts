@@ -11,4 +11,8 @@ describe('AppController', () => {
 
     appController = app.get<AppController>(AppController);
   });
+
+  describe('creates', () => {
+    expect(appController).toBeTruthy();
+  });
 });
