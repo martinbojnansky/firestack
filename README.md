@@ -1,19 +1,19 @@
-# Firestack
+# 🔥 Firestack
 
 ## Getting started
 
-### 01 Install packages
+### 📦 Install packages
 
-Run `cd server && npm i` and `cd client && npm i`.
+> Run `cd server && npm i` and `cd client && npm i`.
 
-### 02 Start application
+### 🚀 Start application
 
-Run `cd server && npm run start` and `cd client && npm run start`.
+> Run `cd server && npm run start` and `cd client && npm run start`.
 
-### 03 Test application
+### 🧪 Test application
 
-Run `cd server && npm run test` and `cd client && npm run test`.
+> Run `cd server && npm run test` and `cd client && npm run test`.
 
-### 04 Lint application
+### 🤬 Lint application
 
-Run `cd server && npm run lint` and `cd client && npm run lint`.
+> Run `cd server && npm run lint` and `cd client && npm run lint`.
