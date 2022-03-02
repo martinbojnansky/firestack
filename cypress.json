@@ -1,0 +1,9 @@
+{
+  "baseUrl": "http://localhost:4200",
+  "video": false,
+  "defaultCommandTimeout": 15000,
+  "retries": 1,
+  "testFiles": "**/*.spec.ts",
+  "experimentalInteractiveRunEvents": true,
+  "env": {}
+}

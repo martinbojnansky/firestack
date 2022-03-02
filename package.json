@@ -1,0 +1,31 @@
+{
+  "name": "firestack",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start-server": "cd server && npm run start",
+    "start-client": "cd client && npm run start",
+    "lint-server": "cd server && npm run lint",
+    "lint-client": "cd client && npm run lint",
+    "test-server": "cd server && npm run test",
+    "test-client": "cd client && npm run test",
+    "cypress": "cypress open",
+    "e2e": "start-server-and-test start-server http://localhost:4201 start-client http://localhost:4200 e2e:headless",
+    "e2e:headless": "cypress run --browser=chrome --headless"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinbojnansky/firestack.git"
+  },
+  "author": "Martin Bojnansky",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/martinbojnansky/firestack/issues"
+  },
+  "homepage": "https://github.com/martinbojnansky/firestack#readme",
+  "devDependencies": {
+    "cypress": "^9.5.1",
+    "start-server-and-test": "^1.14.0",
+    "typescript": "^4.6.2"
+  }
+}

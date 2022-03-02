@@ -1,5 +1,12 @@
-<button (click)="createLog().subscribe()">Create</button>
+<button
+  (click)="createLog().subscribe()"
+  data-tid="app-component__create-log-button"
+>
+  Create log
+</button>
 <hr />
 <ul>
-  <li *ngFor="let log of logs$ | async">{{ log.message | date: 'medium' }}</li>
+  <li *ngFor="let log of logs$ | async" data-tid="app-component__log-item">
+    {{ log.message | date: 'medium' }}
+  </li>
 </ul>

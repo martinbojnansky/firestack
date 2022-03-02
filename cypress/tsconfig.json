@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/cypress",
+    "module": "commonjs",
+    "target": "es2017",
+    "types": ["cypress", "node"],
+    "declaration": true
+  },
+  "include": ["**/*.ts", "plugins/index.js"]
+}

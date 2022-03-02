@@ -1,19 +1,45 @@
 # 🔥 Firestack
 
-## Getting started
+[![verify](https://github.com/martinbojnansky/firestack/actions/workflows/verify.yaml/badge.svg?branch=master)](https://github.com/martinbojnansky/firestack/actions/workflows/verify.yaml)
+
+## 📖 Getting started
 
 ### 📦 Install packages
 
-> Run `cd server && npm i` and `cd client && npm i`.
+> `npm i`
+
+> `cd server`
+
+> `npm i`
+
+> `cd ../client`
+
+> `npm i`
 
 ### 🚀 Start application
 
-> Run `cd server && npm run start` and `cd client && npm run start`.
+> `npm run start-server`
+
+> `npm run start-client`
 
 ### 🧪 Test application
 
-> Run `cd server && npm run test` and `cd client && npm run test`.
+Unit tests:
+
+> `npm run test-server`
+
+> `npm run test-client`
+
+E2E tests:
+
+> `npm run cypress`
+
+> Make sure server and client applications are running. To re-run the application, clear data in the [firestore emulator](http://localhost:4201/firestore/data/).
+
+> Select test suite(s).
 
 ### 🤬 Lint application
 
-> Run `cd server && npm run lint` and `cd client && npm run lint`.
+> `npm run lint-server`
+
+> `npm run lint-client`
