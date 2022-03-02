@@ -5,6 +5,7 @@ import * as express from 'express';
 import * as functions from 'firebase-functions';
 import { Express } from 'express-serve-static-core';
 import { INestApplication } from '@nestjs/common';
+import { initializeApp } from 'firebase-admin/app';
 
 const server = express();
 
@@ -14,6 +15,7 @@ async function bootstrap(expressInstance: Express): Promise<INestApplication> {
     new ExpressAdapter(expressInstance),
     { cors: true },
   );
+  initializeApp();
   return await app.init();
 }
 bootstrap(server);

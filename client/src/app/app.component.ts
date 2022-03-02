@@ -12,6 +12,8 @@ export class AppComponent {
 
   constructor(private actionService: ActionService) {}
 
-  readonly all$ = from(this.actionService.invoke('getAll')('a_b_c'));
-  readonly one$ = from(this.actionService.invoke('getOne')('a'));
+  readonly all$ = from(this.actionService.invoke('getLogs')());
+  readonly create$ = from(
+    this.actionService.invoke('createLog')({ message: new Date().toString() }),
+  );
 }

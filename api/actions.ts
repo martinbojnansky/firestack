@@ -1,6 +1,8 @@
+import { Log } from './models';
+
 export interface Actions {
-  getAll: (query: string) => Promise<string[]>;
-  getOne: (id: string) => Promise<string>;
+  getLogs: () => Promise<Log[]>;
+  createLog: (log: Log) => Promise<Log>;
 }
 
 export interface ActionRequest {
