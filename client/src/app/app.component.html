@@ -1,3 +1,5 @@
-{{ logs$ | async | json }}
-<hr />
 <button (click)="createLog().subscribe()">Create</button>
+<hr />
+<ul>
+  <li *ngFor="let log of logs$ | async">{{ log.message | date: 'medium' }}</li>
+</ul>
