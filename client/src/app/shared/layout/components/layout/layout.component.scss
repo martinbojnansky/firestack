@@ -5,6 +5,7 @@ mat-toolbar {
 }
 
 nav {
+  flex: 1 1 auto;
   @include spacing--right($gutter);
 }
 

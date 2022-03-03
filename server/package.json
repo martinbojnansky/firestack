@@ -12,7 +12,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "start": "npm run build && set FIRESTORE_EMULATOR_HOST=localhost:4203 && firebase emulators:start",
+    "start": "npm run build && set FIRESTORE_EMULATOR_HOST=localhost:4203 && set FIREBASE_AUTH_EMULATOR_HOST=4204 && firebase emulators:start",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --watch",

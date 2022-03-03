@@ -4,6 +4,11 @@
     <nav>
       <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
     </nav>
+    <app-user-menu
+      [user]="authService.user$ | async"
+      (signIn)="authService.signIn().subscribe()"
+      (signOut)="authService.signOut().subscribe()"
+    ></app-user-menu>
   </mat-toolbar>
 </header>
 <main>

@@ -1,7 +1,8 @@
 import { ActionRole } from '@api/actions';
 import { UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
-import { Observable, of } from 'rxjs';
+import { getAuth } from 'firebase-admin/auth';
+import { from, map, Observable, of } from 'rxjs';
 
 export abstract class ActionService<TPayload, TRes> {
   abstract roles: ActionRole[];
@@ -11,7 +12,13 @@ export abstract class ActionService<TPayload, TRes> {
       if (!request.headers?.authorization) {
         throw new UnauthorizedException('Authorization header not provided.');
       } else {
-        throw new UnauthorizedException('Authorization not implemented.');
+        from(
+          getAuth().verifyIdToken(request.headers.authorization.split(' ')[1]),
+        ).pipe(
+          map((token) => {
+            return !!token;
+          }),
+        );
       }
     }
 

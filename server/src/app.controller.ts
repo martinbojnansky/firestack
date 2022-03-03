@@ -11,7 +11,7 @@ export class AppController {
 
   @Post('action')
   async action(
-    @Body() actionRequest: ActionRequest,
+    @Body() body: ActionRequest,
     @Req() request: Request,
     @Res() response: Response,
   ): Promise<any> {
@@ -19,12 +19,13 @@ export class AppController {
     const actionsModuleRef = await this.lazyModuleLoader.load(
       () => ActionsModule,
     );
-    const actionService = actionsModuleRef.get(
-      actionRequest.action,
-    ) as ActionService<unknown, unknown>;
+    const actionService = actionsModuleRef.get(body.action) as ActionService<
+      unknown,
+      unknown
+    >;
     await firstValueFrom(actionService.preAuthorize(request));
     return response
       .status(HttpStatus.OK)
-      .json(await firstValueFrom(actionService.execute(actionRequest.payload)));
+      .json(await firstValueFrom(actionService.execute(body.payload)));
   }
 }
