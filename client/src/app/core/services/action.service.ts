@@ -16,7 +16,7 @@ export class ActionService {
         { action: action, payload: payload } as ActionRequest,
         {
           headers: {
-            Authorization: '', // TODO
+            Authorization: 'Bearer ***',
           },
         },
       );

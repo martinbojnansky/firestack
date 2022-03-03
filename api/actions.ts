@@ -9,3 +9,9 @@ export interface ActionRequest {
   action: keyof Actions;
   payload: unknown;
 }
+
+export enum ActionRole {
+  viewer = 'viewer',
+  editor = 'editor',
+  admin = 'admin',
+}

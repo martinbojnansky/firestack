@@ -20,7 +20,7 @@ export class HomeViewComponent {
   createLog() {
     return from(
       this.actionService.invoke('createLog')({
-        message: new Date().toISOString(),
+        message: new Date().toString(),
       }),
     ).pipe(tap(() => this.reloadRequired$.next(true)));
   }

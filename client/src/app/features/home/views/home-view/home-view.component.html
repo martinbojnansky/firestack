@@ -4,14 +4,14 @@
       mat-button
       color="primary"
       (click)="createLog().subscribe()"
-      data-tid="app-component__create-log-button"
+      data-tid="home-view__create-log-button"
     >
       + Create log
     </button>
     <mat-list>
       <mat-list-item
         *ngFor="let log of logs$ | async"
-        data-tid="app-component__log-item"
+        data-tid="home-view__log-item"
       >
         {{ log.message | date: 'medium' }}
       </mat-list-item>

@@ -45,3 +45,9 @@ E2E tests:
 ### 🔎 Analyze bundle
 
 > `npm run analyze`
+
+### 🔨 Kill port
+
+`netstat -ano | findstr :PORT`
+
+`taskkill /PID **** /F`

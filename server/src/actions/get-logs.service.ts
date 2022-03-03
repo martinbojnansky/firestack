@@ -6,11 +6,13 @@ import { ActionService } from '../action.service';
 
 @Injectable()
 export class GetLogsService extends ActionService<void, Log[]> {
+  readonly roles = [];
+
   constructor(private firebaseService: FirebaseService) {
     super();
   }
 
-  run(): Observable<Log[]> {
+  execute(): Observable<Log[]> {
     return from(this.firebaseService.logs.get()).pipe(
       map((snapshot) => snapshot.docs.map((doc) => doc.data() as Log)),
     );
