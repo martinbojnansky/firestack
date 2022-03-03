@@ -1,0 +1,126 @@
+// #region ANGULAR
+
+@mixin ng-host() {
+  :host {
+    @content;
+  }
+}
+
+@mixin ng-deep() {
+  :host ::ng-deep {
+    @content;
+  }
+}
+
+// #endregion
+
+// #region RESPONSIVITY
+
+@mixin min-width($min) {
+  @media screen and (min-width: ($min + 'px')) {
+    @content;
+  }
+}
+
+@mixin max-width($max) {
+  @media screen and (max-width: ($max - 1 + 'px')) {
+    @content;
+  }
+}
+
+@mixin min-max-width($min, $max) {
+  @media screen and (min-width: ($min + 'px')) and (max-width: ($max - 1 + 'px')) {
+    @content;
+  }
+}
+
+// #endregion
+
+// #region TEXT
+
+@mixin ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// #endregion
+
+// #region POSITIONING
+
+@mixin overlay() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+@mixin p-absolute--center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin hidden() {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+// #endregion
+
+// #region LAYOUT
+
+@mixin spacing--right($value) {
+  > *:not(.hidden):not(:last-child) {
+    margin-right: $value;
+  }
+}
+
+@mixin spacing--left($value) {
+  > *:not(.hidden):not(:first-child) {
+    margin-left: $value;
+  }
+}
+
+@mixin spacing--top($value) {
+  > *:not(.hidden):not(:first-child) {
+    margin-top: $value;
+  }
+}
+
+@mixin spacing--bottom($value) {
+  > *:not(.hidden):not(:last-child) {
+    margin-bottom: $value;
+  }
+}
+
+@mixin gap--horizontal($value) {
+  margin-left: -1 * (math.div($value, 2)) !important;
+  margin-right: -1 * (math.div($value, 2)) !important;
+
+  > * {
+    margin-left: math.div($value, 2) !important;
+    margin-right: math.div($value, 2) !important;
+  }
+}
+
+@mixin gap--vertical($value) {
+  margin-top: -1 * (math.div($value, 2)) !important;
+  margin-bottom: -1 * (math.div($value, 2)) !important;
+
+  > * {
+    margin-top: math.div($value, 2) !important;
+    margin-bottom: math.div($value, 2) !important;
+  }
+}
+
+// #endregion

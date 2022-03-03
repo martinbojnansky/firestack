@@ -1,0 +1,19 @@
+@import 'global';
+
+mat-toolbar {
+  @include spacing--right($gutter-m);
+}
+
+nav {
+  @include spacing--right($gutter);
+}
+
+nav a {
+  &.active {
+    background-color: rgba(255, 255, 255, 0.16);
+  }
+}
+
+main {
+  padding: $gutter;
+}

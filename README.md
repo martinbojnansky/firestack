@@ -1,7 +1,5 @@
 # 🔥 Firestack
 
-[![verify](https://github.com/martinbojnansky/firestack/actions/workflows/verify.yaml/badge.svg?branch=master)](https://github.com/martinbojnansky/firestack/actions/workflows/verify.yaml)
-
 ## 📖 Getting started
 
 ### 📦 Install packages
@@ -43,3 +41,7 @@ E2E tests:
 > `npm run lint-server`
 
 > `npm run lint-client`
+
+### 🔎 Analyze bundle
+
+> `npm run analyze`

@@ -1,0 +1,20 @@
+<app-layout>
+  <div>
+    <button
+      mat-button
+      color="primary"
+      (click)="createLog().subscribe()"
+      data-tid="app-component__create-log-button"
+    >
+      + Create log
+    </button>
+    <mat-list>
+      <mat-list-item
+        *ngFor="let log of logs$ | async"
+        data-tid="app-component__log-item"
+      >
+        {{ log.message | date: 'medium' }}
+      </mat-list-item>
+    </mat-list>
+  </div>
+</app-layout>
