@@ -15,6 +15,8 @@ export interface ActionErrors {
   };
 }
 
+export type ActionRole = null | 'user' | 'admin';
+
 export interface ActionRequest {
   action: keyof Actions;
   payload: unknown;

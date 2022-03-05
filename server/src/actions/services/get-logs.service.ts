@@ -1,3 +1,4 @@
+import { ActionRole } from '@api/actions';
 import { Log } from '@api/models';
 import { Injectable } from '@nestjs/common';
 import { from, map, Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { ActionService } from '../../core/services/action.service';
 
 @Injectable()
 export class GetLogsService extends ActionService<void, Log[]> {
-  readonly public = false;
+  readonly requiredRole: ActionRole = 'user';
 
   constructor(private firebaseService: FirebaseService) {
     super();

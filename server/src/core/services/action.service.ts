@@ -1,25 +1,43 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { ActionRole } from '@api/actions';
+import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
-import { getAuth } from 'firebase-admin/auth';
+import { DecodedIdToken, getAuth } from 'firebase-admin/auth';
 import { catchError, from, map, Observable, of } from 'rxjs';
 
 export abstract class ActionService<TPayload, TRes> {
-  abstract public: boolean;
+  abstract requiredRole: ActionRole;
 
   preAuthorize(request: Request): Observable<void> {
-    if (this.public) {
+    if (this.requiredRole === null) {
       return of(void 0);
     }
 
-    if (!request.headers?.authorization) {
-      throw new UnauthorizedException('Authorization header not provided.');
+    if (
+      !request.headers?.authorization ||
+      !request.headers?.authorization?.startsWith('Bearer ')
+    ) {
+      throw new UnauthorizedException(
+        'Authorization header not provided or incorrect.',
+      );
     } else {
       return from(
         getAuth().verifyIdToken(request.headers.authorization.split(' ')[1]),
       ).pipe(
-        map((token) => {}),
+        map((token: DecodedIdToken & { role: ActionRole }) => {
+          // Get role from token and default it to "user" for all signed in users.
+          const tokenRole = token?.role || 'user';
+          if (tokenRole === 'admin') {
+            return;
+          } else if (tokenRole !== this.requiredRole) {
+            throw new ForbiddenException('Insufficient user role.');
+          }
+        }),
         catchError((err) => {
-          throw new UnauthorizedException('Authorization token invalid.');
+          if (err instanceof ForbiddenException) {
+            throw err;
+          } else {
+            throw new UnauthorizedException('User authorization failed.');
+          }
         }),
       );
     }
