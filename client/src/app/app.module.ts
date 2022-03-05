@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { FirebaseService } from './core/services/firebase.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +16,4 @@ import { FirebaseService } from './core/services/firebase.service';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-  constructor(private firebaseService: FirebaseService) {}
-}
+export class AppModule {}

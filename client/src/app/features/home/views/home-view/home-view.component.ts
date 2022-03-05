@@ -75,7 +75,8 @@ export class HomeViewComponent implements OnInit, OnDestroy {
           },
           completed: (log) => {
             this.creatingLog$.next(false);
-            this.updateLogs(); // or this.logs$.next([...this.logs$.value, log]);
+            //this.updateLogs();
+            this.logs$.next([log, ...this.logs$.value]);
           },
           failed: (e) => {
             this.createLogError$.next(e);
