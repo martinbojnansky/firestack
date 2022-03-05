@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { GoogleAuthProvider, signInWithRedirect, User } from 'firebase/auth';
+import { Nullable } from 'ng-toolkit-lib';
 import { BehaviorSubject, from, Observable, tap } from 'rxjs';
 import { FirebaseService } from './firebase.service';
 
 export abstract class AuthService {
-  abstract readonly user$: Observable<User | null>;
-  abstract readonly token$: Observable<string | null>;
+  abstract readonly user$: Observable<Nullable<User>>;
+  abstract readonly token$: Observable<Nullable<string>>;
 
   abstract signIn(): Observable<void>;
   abstract signOut(): Observable<void>;
@@ -16,8 +17,8 @@ export abstract class AuthService {
   providedIn: 'root',
 })
 export class FirebaseAuthService extends AuthService {
-  readonly user$ = new BehaviorSubject<User | null>(null);
-  readonly token$ = new BehaviorSubject<string | null>(null);
+  readonly user$ = new BehaviorSubject<Nullable<User>>(undefined);
+  readonly token$ = new BehaviorSubject<Nullable<string>>(undefined);
 
   constructor(
     private firebaseService: FirebaseService,

@@ -3,6 +3,9 @@
     <span>🔥 Firestack</span>
     <nav>
       <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
+      <ng-container *ngIf="authService.user$ | async">
+        <a mat-button routerLink="/auth/logs" routerLinkActive="active">Logs</a>
+      </ng-container>
     </nav>
     <app-user-menu
       [user]="authService.user$ | async"

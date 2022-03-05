@@ -6,7 +6,7 @@ import {
   UrlSegment,
   UrlTree,
 } from '@angular/router';
-import { map, Observable, take } from 'rxjs';
+import { filter, map, Observable, of, switchMap, take } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -48,8 +48,15 @@ export class AuthGuard {
 
   protected isAuthorized(): Observable<boolean> {
     return this.authService.user$.pipe(
+      filter((user) => user !== undefined),
       take(1),
-      map((user) => !!user),
+      switchMap((user) => {
+        if (!user) {
+          return this.authService.signIn().pipe(map(() => false));
+        } else {
+          return of(true);
+        }
+      }),
     );
   }
 }

@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { User } from 'firebase/auth';
+import { Nullable } from 'ng-toolkit-lib';
 
 @Component({
   selector: 'app-user-menu',
@@ -15,7 +16,7 @@ import { User } from 'firebase/auth';
 })
 export class UserMenuComponent {
   @Input()
-  user!: User | null;
+  user: Nullable<User>;
 
   @Output()
   readonly signIn = new EventEmitter<void>();
