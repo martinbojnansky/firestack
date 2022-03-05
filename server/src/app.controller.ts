@@ -3,7 +3,7 @@ import { Body, Controller, HttpStatus, Post, Req, Res } from '@nestjs/common';
 import { LazyModuleLoader } from '@nestjs/core';
 import { Request, Response } from 'express';
 import { firstValueFrom } from 'rxjs';
-import { ActionService } from './action.service';
+import { ActionService } from './core/services/action.service';
 
 @Controller()
 export class AppController {
@@ -15,7 +15,7 @@ export class AppController {
     @Req() request: Request,
     @Res() response: Response,
   ): Promise<any> {
-    const { ActionsModule } = await import('./actions.module');
+    const { ActionsModule } = await import('./actions/actions.module');
     const actionsModuleRef = await this.lazyModuleLoader.load(
       () => ActionsModule,
     );

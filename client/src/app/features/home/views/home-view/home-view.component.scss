@@ -1,0 +1,7 @@
+@import 'global';
+
+@include ng-deep {
+  main {
+    @include spacing--bottom($gutter-m);
+  }
+}

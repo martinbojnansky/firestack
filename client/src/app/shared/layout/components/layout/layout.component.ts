@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Nullable } from 'ng-toolkit-lib';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -8,5 +9,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {
+  @Input()
+  busy: Nullable<boolean>;
+
   constructor(public authService: AuthService) {}
 }

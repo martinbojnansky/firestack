@@ -1,13 +1,25 @@
-<app-layout>
+<app-layout [title]="'Homepage'" [busy]="busy$ | async">
   <div>
     <button
-      mat-button
-      color="primary"
-      (click)="createLog().subscribe()"
+      mat-flat-button
+      color="accent"
+      (click)="createLog()"
       data-tid="home-view__create-log-button"
+      [disabled]="creatingLog$ | async"
     >
-      + Create log
+      Create Log
     </button>
+    <span
+      *ngIf="createLogError$ | async as createLogError"
+      style="color: red"
+      >{{ createLogError | json }}</span
+    >
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+    <span *ngIf="logsError$ | async as logsError" style="color: red">{{
+      logsError | json
+    }}</span>
     <mat-list>
       <mat-list-item
         *ngFor="let log of logs$ | async"

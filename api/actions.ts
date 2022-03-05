@@ -6,13 +6,16 @@ export interface Actions {
   createLog: (log: Log) => Observable<Log>;
 }
 
+export interface ActionErrors {
+  deprecated: {
+    because: string;
+  };
+  unsupported: {
+    because: string;
+  };
+}
+
 export interface ActionRequest {
   action: keyof Actions;
   payload: unknown;
-}
-
-export enum ActionRole {
-  viewer = 'viewer',
-  editor = 'editor',
-  admin = 'admin',
 }

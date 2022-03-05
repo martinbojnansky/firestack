@@ -13,6 +13,6 @@ describe('AppController', () => {
   });
 
   describe('creates', () => {
-    expect(appController).toBeTruthy();
+    expect(AppController).toBeTruthy();
   });
 });

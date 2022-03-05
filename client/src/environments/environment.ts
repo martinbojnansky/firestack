@@ -2,6 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+export type Environment = typeof environment;
+
 export const environment = {
   production: false,
   actionsUrl: 'http://localhost:4202/firestack-dev/us-central1/api/action',

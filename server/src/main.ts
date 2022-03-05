@@ -7,6 +7,8 @@ import { initializeApp } from 'firebase-admin/app';
 import * as functions from 'firebase-functions';
 import { AppModule } from './app.module';
 
+require('dotenv').config();
+
 const server = express();
 
 async function bootstrap(expressInstance: Express): Promise<INestApplication> {
@@ -15,7 +17,9 @@ async function bootstrap(expressInstance: Express): Promise<INestApplication> {
     new ExpressAdapter(expressInstance),
     { cors: true },
   );
-  initializeApp();
+  initializeApp({
+    /*TODO*/
+  });
   return await app.init();
 }
 bootstrap(server);

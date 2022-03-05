@@ -14,3 +14,11 @@
 <main>
   <ng-content></ng-content>
 </main>
+
+<mat-progress-bar
+  *ngIf="busy"
+  color="accent"
+  mode="indeterminate"
+  class="progress-bar"
+>
+</mat-progress-bar>

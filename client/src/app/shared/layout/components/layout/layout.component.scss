@@ -18,3 +18,9 @@ nav a {
 main {
   padding: $gutter;
 }
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  background: transparent;
+}

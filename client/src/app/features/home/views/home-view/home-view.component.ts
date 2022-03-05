@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { Log } from '@api/models';
+import { effects, ObservableUnsubscriber } from 'ng-toolkit-lib';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { ActionService } from 'src/app/core/services/action.service';
 
 @Component({
@@ -8,20 +15,75 @@ import { ActionService } from 'src/app/core/services/action.service';
   styleUrls: ['./home-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeViewComponent {
-  readonly reloadRequired$ = new BehaviorSubject(true);
+export class HomeViewComponent implements OnInit, OnDestroy {
+  private readonly unsubscriber = new ObservableUnsubscriber();
 
-  readonly logs$ = this.reloadRequired$.pipe(
-    switchMap(() => this.actionService.invoke('getLogs')()),
+  readonly logs$ = new BehaviorSubject<Log[]>([]);
+  readonly logsError$ = new BehaviorSubject<unknown>(null); // TODO: Use type and translations
+  readonly updatingLogs$ = new BehaviorSubject(false);
+
+  readonly createLogError$ = new BehaviorSubject<unknown>(null); // TODO: Use type and translations
+  readonly creatingLog$ = new BehaviorSubject<boolean>(false);
+
+  readonly busy$ = combineLatest([this.updatingLogs$, this.creatingLog$]).pipe(
+    map((vs) => vs.some((v) => !!v)),
   );
 
   constructor(private actionService: ActionService) {}
 
-  createLog() {
-    return this.actionService
+  ngOnInit(): void {
+    this.updateLogs();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscriber.destroy();
+  }
+
+  updateLogs(): void {
+    this.actionService
+      .invoke('getLogs')()
+      .pipe(
+        effects({
+          started: () => {
+            this.updatingLogs$.next(true);
+            this.logsError$.next(null);
+          },
+          completed: (logs) => {
+            this.updatingLogs$.next(false);
+            this.logs$.next(logs);
+          },
+          failed: (e) => {
+            this.logsError$.next(e);
+            this.updatingLogs$.next(false);
+          },
+        }),
+        this.unsubscriber.onDestroyOrResubscribe('updateLogs'),
+      )
+      .subscribe();
+  }
+
+  createLog(): void {
+    this.actionService
       .invoke('createLog')({
         message: new Date().toString(),
       })
-      .pipe(tap(() => this.reloadRequired$.next(true)));
+      .pipe(
+        effects({
+          started: () => {
+            this.creatingLog$.next(true);
+            this.createLogError$.next(null);
+          },
+          completed: (log) => {
+            this.creatingLog$.next(false);
+            this.updateLogs(); // or this.logs$.next([...this.logs$.value, log]);
+          },
+          failed: (e) => {
+            this.createLogError$.next(e);
+            this.creatingLog$.next(false);
+          },
+        }),
+        this.unsubscriber.onDestroy(),
+      )
+      .subscribe();
   }
 }

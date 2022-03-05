@@ -1,4 +1,6 @@
-export const environment = {
+import { Environment } from './environment';
+
+export const environment: Environment = {
   production: true,
   actionsUrl: 'https://us-central1-firestack-dev.cloudfunctions.net/api/action',
   firebaseConfig: {
