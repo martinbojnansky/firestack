@@ -8,8 +8,7 @@
       </ng-container>
     </nav>
     <app-user-menu
-      *ngIf="authService.user$ | async as user"
-      [user]="user"
+      [user]="authService.user$ | async"
       (signIn)="authService.signIn().subscribe()"
       (signOut)="authService.signOut().subscribe()"
     ></app-user-menu>

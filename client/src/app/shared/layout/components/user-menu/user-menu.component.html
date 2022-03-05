@@ -1,5 +1,7 @@
 <ng-container *ngIf="!user">
-  <button mat-button (click)="signIn.emit()">Sign in</button>
+  <button mat-flat-button color="accent" (click)="signIn.emit()">
+    Sign in
+  </button>
 </ng-container>
 
 <ng-container *ngIf="user">
