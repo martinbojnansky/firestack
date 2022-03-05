@@ -15,8 +15,14 @@ nav a {
   }
 }
 
-main {
-  padding: $gutter;
+@include ng-deep {
+  main {
+    display: flex;
+    flex-direction: column;
+    padding: $gutter;
+
+    @include spacing--bottom($gutter-m);
+  }
 }
 
 .progress-bar {
