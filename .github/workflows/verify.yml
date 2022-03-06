@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify-client:
+  client:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -26,7 +26,7 @@ jobs:
       - run: npm run lint
       - run: npm run test:ci
       - run: npm run build
-  verify-server:
+  server:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -41,7 +41,8 @@ jobs:
       - run: npm run lint
       - run: npm run test:ci
       - run: npm run build
-  verify-e2e:
+  integration:
+    needs: [client, server]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -49,4 +50,5 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - run: npm ci
       - run: npm run e2e
