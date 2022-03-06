@@ -12,7 +12,7 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('creates', () => {
-    expect(AppController).toBeTruthy();
+  it('creates', () => {
+    expect(appController).toBeTruthy();
   });
 });
