@@ -8,7 +8,7 @@ import { ActionService } from '../../core/services/action.service';
 
 @Injectable()
 export class GetLogsService extends ActionService<void, Log[]> {
-  readonly requiredRole: ActionRole = 'user';
+  readonly requiredRole: ActionRole = ActionRole.user;
 
   constructor(private firebaseService: FirebaseService) {
     super();

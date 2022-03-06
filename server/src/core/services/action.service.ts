@@ -1,4 +1,4 @@
-import { ActionRole } from '@api/actions';
+import { ActionRole, actionRolesMap } from '@api/actions';
 import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
 import { DecodedIdToken, getAuth } from 'firebase-admin/auth';
@@ -25,10 +25,8 @@ export abstract class ActionService<TPayload, TRes> {
       ).pipe(
         map((token: DecodedIdToken & { role: ActionRole }) => {
           // Get role from token and default it to "user" for all signed in users.
-          const tokenRole = token?.role || 'user';
-          if (tokenRole === 'admin') {
-            return;
-          } else if (tokenRole !== this.requiredRole) {
+          const tokenRole: ActionRole = token?.role || ActionRole.user;
+          if (!actionRolesMap[tokenRole].includes(this.requiredRole)) {
             throw new ForbiddenException('Insufficient user role.');
           }
         }),
