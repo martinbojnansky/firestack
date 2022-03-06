@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CoreModule } from './core.module';
+import { AppTestingModule } from '../app.testing-module';
 
 @NgModule({
   declarations: [],
-  imports: [CoreModule],
+  imports: [AppTestingModule],
   providers: [],
 })
 export class CoreTestingModule {}
