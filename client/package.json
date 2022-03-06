@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "test": "ng test",
-    "test:ci": "ng test --watch=false",
+    "test:ci": "ng test --configuration production --watch=false",
     "analyze": "ng build --configuration production --stats-json && npx webpack-bundle-analyzer dist/firestack/stats.json"
   },
   "private": true,

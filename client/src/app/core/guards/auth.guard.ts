@@ -25,6 +25,7 @@ export class AuthGuard {
     | Promise<boolean | UrlTree> {
     return this.isAuthorized();
   }
+
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
@@ -35,6 +36,7 @@ export class AuthGuard {
     | Promise<boolean | UrlTree> {
     return this.isAuthorized();
   }
+
   canLoad(
     route: Route,
     segments: UrlSegment[],
