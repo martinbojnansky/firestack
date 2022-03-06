@@ -4,47 +4,47 @@
 
 ### 📦 Install packages
 
-> `npm i`
+`npm i`
 
-> `cd server`
+`cd server`
 
-> `npm i`
+`npm i`
 
-> `cd ../client`
+`cd ../client`
 
-> `npm i`
+`npm i`
 
 ### 🚀 Start application
 
-> `npm run start-server`
+`npm run start-server`
 
-> `npm run start-client`
+`npm run start-client`
 
 ### 🧪 Test application
 
 Unit tests:
 
-> `npm run test-server`
+`npm run test-server`
 
-> `npm run test-client`
+`npm run test-client`
 
 E2E tests:
 
-> `npm run cypress`
+`npm run cypress`
 
-> Make sure server and client applications are running. To re-run the application, clear data in the [firestore emulator](http://localhost:4201/firestore/data/).
+Make sure server and client applications are running. To re-run the application, clear data in the [firestore emulator](http://localhost:4201/firestore/data/).
 
-> Select test suite(s).
+Select test suite(s).
 
 ### 🤬 Lint application
 
-> `npm run lint-server`
+`npm run lint-server`
 
-> `npm run lint-client`
+`npm run lint-client`
 
 ### 🔎 Analyze bundle
 
-> `npm run analyze`
+`npm run analyze`
 
 ### 🔨 Kill port
 
