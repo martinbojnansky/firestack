@@ -1,12 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ActionRequest, Actions } from '../../../../../api/actions';
 import { AuthService } from './auth.service';
 
 export abstract class ActionService {
-  abstract invoke<T extends keyof Actions>(action: T): Actions[T];
+  abstract get<
+    TKey extends keyof Actions,
+    TPayload = Actions[TKey][0],
+    TResponse = Actions[TKey][1],
+    TInvoker = (payload: TPayload) => Observable<TResponse>,
+  >(action: TKey): TInvoker;
 }
 
 @Injectable({
@@ -20,8 +25,13 @@ export class FirebaseActionService extends ActionService {
     super();
   }
 
-  invoke<T extends keyof Actions>(action: T): Actions[T] {
-    const invoker = (payload: any) =>
+  get<
+    TKey extends keyof Actions,
+    TPayload = Actions[TKey][0],
+    TResponse = Actions[TKey][1],
+    TInvoker = (payload: TPayload) => Observable<TResponse>,
+  >(action: TKey): TInvoker {
+    const invoker = (payload: TPayload) =>
       this.authService.token$.pipe(
         switchMap((token) =>
           this.httpClient.post(
@@ -35,6 +45,6 @@ export class FirebaseActionService extends ActionService {
           ),
         ),
       );
-    return invoker as unknown as Actions[T];
+    return invoker as unknown as TInvoker;
   }
 }
