@@ -23,9 +23,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
+      - run: npm run test:ci
       - run: npm run lint
       - run: npm run build
-      - run: npm run test:ci
   server:
     runs-on: ubuntu-latest
     defaults:
@@ -38,9 +38,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
+      - run: npm run test:ci
       - run: npm run lint
       - run: npm run build
-      - run: npm run test:ci
   integration:
     needs: [client, server]
     runs-on: ubuntu-latest

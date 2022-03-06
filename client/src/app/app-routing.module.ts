@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('./features/home/home.module').then((m) => m.HomeModule),
+      import('src/app/features/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'auth',
@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: 'logs',
         loadChildren: () =>
-          import('./features/logs/logs.module').then((m) => m.LogsModule),
+          import('src/app/features/logs/logs.module').then((m) => m.LogsModule),
       },
     ],
   },
