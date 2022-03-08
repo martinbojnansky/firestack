@@ -1,0 +1,25 @@
+name: verify
+
+on:
+  push:
+    branches-ignore: [master]
+  pull_request:
+    branches-ignore: [master]
+
+concurrency:
+  group: verify#${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm run ci
+      - run: npm run test
+      - run: npm run e2e
+      - run: npm run lint

@@ -1,9 +1,8 @@
-import { Observable } from '../client/node_modules/rxjs';
 import { Log } from './models';
 
 export interface Actions {
-  getLogs: () => Observable<Log[]>;
-  createLog: (log: Log) => Observable<Log>;
+  getLogs: [void, Log[]];
+  createLog: [Log, Log];
 }
 
 export interface ActionErrors {
@@ -33,3 +32,5 @@ export interface ActionRequest {
   action: keyof Actions;
   payload: unknown;
 }
+
+export interface Observable<T> {}

@@ -4,29 +4,19 @@
 
 ### 📦 Install packages
 
-`npm i`
+`npm run install`
 
-`cd server`
+### 🚀 Start applications
 
-`npm i`
+`npm run server`
 
-`cd ../client`
-
-`npm i`
-
-### 🚀 Start application
-
-`npm run start-server`
-
-`npm run start-client`
+`npm run client`
 
 ### 🧪 Test application
 
 Unit tests:
 
-`npm run test-server`
-
-`npm run test-client`
+`npm run test`
 
 E2E tests:
 
@@ -38,11 +28,11 @@ Select test suite(s).
 
 ### 🤬 Lint application
 
-`npm run lint-server`
+`npm run lint`
 
-`npm run lint-client`
+### 🔎 Analyze frontend bundle
 
-### 🔎 Analyze bundle
+`cd client`
 
 `npm run analyze`
 

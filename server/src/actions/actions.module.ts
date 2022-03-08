@@ -6,9 +6,11 @@ import { CreateLogService } from './services/create-log.service';
 import { GetLogsService } from './services/get-logs.service';
 
 const actionProviders: {
-  [action in keyof Actions]: Type<ActionService<unknown, unknown>>;
+  [TKey in keyof Actions]: Type<
+    ActionService<Actions[TKey][0], Actions[TKey][1]>
+  >;
 } = {
-  getLogs: GetLogsService, // GetLogsService || FailingGetLogsService
+  getLogs: GetLogsService, // or FailingGetLogsService
   createLog: CreateLogService,
 };
 
