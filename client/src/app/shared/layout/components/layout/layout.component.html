@@ -1,6 +1,6 @@
 <header>
   <mat-toolbar color="primary">
-    <span>🔥 Firestack</span>
+    <span data-tid="layout__header-title">🔥 Firestack</span>
     <nav>
       <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
       <ng-container *ngIf="authService.user$ | async">
