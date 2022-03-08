@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "install": "npm i && cd server && npm i && cd ../client && npm i",
+    "i": "npm i && cd server && npm i && cd ../client && npm i",
     "ci": "npm ci && cd server && npm ci && cd ../client && npm ci",
     "server": "cd server && npm run start",
     "client": "cd client && npm run start",
