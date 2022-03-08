@@ -3,15 +3,15 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "start-server": "cd server && npm run start",
-    "start-client": "cd client && npm run start",
-    "lint-server": "cd server && npm run lint",
-    "lint-client": "cd client && npm run lint",
-    "test-server": "cd server && npm run test",
-    "test-client": "cd client && npm run test",
+    "install": "npm ci && cd server && npm ci && cd ../client && npm ci",
+    "server": "cd server && npm run start",
+    "client": "cd client && npm run start",
+    "build": "cd server && npm run build && cd ../client && npm run build",
+    "lint": "cd server && npm run lint && cd ../client && npm run lint",
+    "test": "cd server && npm run test:ci && cd ../client && npm run test:ci",
+    "e2e": "start-server-and-test server http://localhost:4201 client http://localhost:4200 cypress:ci",
     "cypress": "cypress open",
-    "e2e": "start-server-and-test start-server http://localhost:4201 start-client http://localhost:4200 e2e:headless",
-    "e2e:headless": "cypress run --browser=chrome --headless"
+    "cypress:ci": "cypress run --browser=chrome --headless"
   },
   "repository": {
     "type": "git",
