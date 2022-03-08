@@ -1,0 +1,28 @@
+<app-layout [title]="'Homepage'" [busy]="busy$ | async">
+  <button
+    mat-flat-button
+    color="accent"
+    (click)="createLog()"
+    data-tid="logs-list-view__create-log-button"
+    [disabled]="creatingLog$ | async"
+  >
+    Create Log
+  </button>
+  <span *ngIf="createLogError$ | async as createLogError" style="color: red">{{
+    createLogError | json
+  }}</span>
+  <mat-divider></mat-divider>
+  <div>
+    <span *ngIf="logsError$ | async as logsError" style="color: red">{{
+      logsError | json
+    }}</span>
+    <mat-list>
+      <mat-list-item
+        *ngFor="let log of logs$ | async"
+        data-tid="logs-list-view__log-item"
+      >
+        {{ log.message | date: 'medium' }}
+      </mat-list-item>
+    </mat-list>
+  </div>
+</app-layout>
