@@ -1,3 +1,9 @@
+import { Timestamp } from '../client/node_modules/firebase/firestore';
+
 export interface Log {
-  message: string;
+  event: string;
+  description?: string;
+  time: Timestamp;
 }
+
+export interface LogCreate extends Pick<Log, 'event' | 'description'> {}

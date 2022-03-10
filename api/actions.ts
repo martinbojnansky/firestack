@@ -1,8 +1,8 @@
-import { Log } from './models';
+import { Log, LogCreate } from './models';
 
 export interface Actions {
   getLogs: [void, Log[]];
-  createLog: [Log, Log];
+  createLog: [LogCreate, Log];
 }
 
 export interface ActionErrors {

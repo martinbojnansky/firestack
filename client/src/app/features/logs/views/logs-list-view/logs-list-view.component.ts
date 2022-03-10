@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Log } from '@api/models';
-import { effects, ObservableUnsubscriber } from 'ng-toolkit-lib';
+import { effects, Nullable, ObservableUnsubscriber } from 'ng-toolkit-lib';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { ActionService } from 'src/app/core/services/action.service';
 
@@ -22,6 +22,7 @@ export class LogsListViewComponent implements OnInit, OnDestroy {
   readonly logsError$ = new BehaviorSubject<unknown>(null); // TODO: Use type and translations
   readonly updatingLogs$ = new BehaviorSubject(false);
 
+  readonly createLog$ = new BehaviorSubject<Nullable<Log>>(null);
   readonly createLogError$ = new BehaviorSubject<unknown>(null); // TODO: Use type and translations
   readonly creatingLog$ = new BehaviorSubject<boolean>(false);
 
@@ -62,10 +63,10 @@ export class LogsListViewComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  createLog(): void {
+  createLog(log: Log): void {
     this.actionService
       .get('createLog')({
-        message: new Date().toString(),
+        ...log,
       })
       .pipe(
         effects({
@@ -77,6 +78,7 @@ export class LogsListViewComponent implements OnInit, OnDestroy {
             this.creatingLog$.next(false);
             //this.updateLogs();
             this.logs$.next([log, ...this.logs$.value]);
+            this.createLog$.next(null);
           },
           failed: (e) => {
             this.createLogError$.next(e);

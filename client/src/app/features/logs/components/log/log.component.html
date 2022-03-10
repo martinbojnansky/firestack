@@ -1,0 +1,35 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>What happened?</mat-label>
+    <input
+      matInput
+      [formControl]="eventControl"
+      placeholder="Ex. I won jackpot"
+      value=""
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>How do you feel about that?</mat-label>
+    <textarea
+      matInput
+      [formControl]="descriptionControl"
+      placeholder="Ex. It makes me feel..."
+    ></textarea>
+  </mat-form-field>
+
+  <span>
+    <button
+      *ngIf="form.dirty"
+      mat-flat-button
+      color="accent"
+      (click)="save()"
+      [disabled]="form.pristine"
+    >
+      Save
+    </button>
+    <button *ngIf="form.dirty" mat-flat-button color="accent" (click)="reset()">
+      Reset
+    </button>
+  </span>
+</form>
