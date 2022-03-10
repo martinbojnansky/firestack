@@ -1,4 +1,4 @@
-import { ActionErrors } from '@api/actions';
+import { ActionErrors } from '@api/errors';
 import { UnprocessableEntityException } from '@nestjs/common';
 
 export class ActionError extends UnprocessableEntityException {

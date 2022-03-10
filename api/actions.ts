@@ -5,15 +5,6 @@ export interface Actions {
   createLog: [LogCreate, Log];
 }
 
-export interface ActionErrors {
-  deprecated: {
-    because: string;
-  };
-  unsupported: {
-    because: string;
-  };
-}
-
 export enum ActionRole {
   none = 'none',
   user = 'user',
@@ -32,5 +23,3 @@ export interface ActionRequest {
   action: keyof Actions;
   payload: unknown;
 }
-
-export interface Observable<T> {}

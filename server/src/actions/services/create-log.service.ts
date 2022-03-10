@@ -1,5 +1,6 @@
 import { ActionRole } from '@api/actions';
-import { Log } from '@api/models';
+import { Log, LogCreate } from '@api/models';
+import { logCreateSchema } from '@api/schemas';
 import { Injectable } from '@nestjs/common';
 import { Timestamp } from 'firebase-admin/firestore';
 import { from, map, Observable } from 'rxjs';
@@ -7,20 +8,19 @@ import { FirebaseService } from 'src/core/services/firebase.service';
 import { ActionService } from '../../core/services/action.service';
 
 @Injectable()
-export class CreateLogService extends ActionService<Log, Log> {
+export class CreateLogService extends ActionService<LogCreate, Log> {
   readonly requiredRole: ActionRole = ActionRole.user;
+  readonly schema = logCreateSchema;
 
   constructor(private firebaseService: FirebaseService) {
     super();
   }
 
-  execute(payload: Log): Observable<Log> {
-    return from(
-      this.firebaseService.logs.doc().set(<Log>{
-        event: payload.event,
-        description: payload.description,
-        time: Timestamp.now(),
-      }),
-    ).pipe(map(() => payload));
+  execute(payload: LogCreate): Observable<Log> {
+    const log: Log = {
+      ...payload,
+      time: Timestamp.now(),
+    };
+    return from(this.firebaseService.logs.doc().set(log)).pipe(map(() => log));
   }
 }

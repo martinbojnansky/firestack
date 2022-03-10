@@ -1,9 +1,12 @@
-import { Timestamp } from '../client/node_modules/firebase/firestore';
+export interface Timestamp {
+  seconds: number;
+  nanoseconds: number;
+}
 
 export interface Log {
   event: string;
-  description?: string;
+  description: string | null;
   time: Timestamp;
 }
 
-export interface LogCreate extends Pick<Log, 'event' | 'description'> {}
+export type LogCreate = Pick<Log, 'event' | 'description'>;

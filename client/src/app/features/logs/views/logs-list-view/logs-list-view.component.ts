@@ -66,7 +66,8 @@ export class LogsListViewComponent implements OnInit, OnDestroy {
   createLog(log: Log): void {
     this.actionService
       .get('createLog')({
-        ...log,
+        event: log.event,
+        description: log.description,
       })
       .pipe(
         effects({
