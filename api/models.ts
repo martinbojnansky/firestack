@@ -9,7 +9,7 @@ export type Timestamp = z.infer<typeof timestampSchema>;
 
 export const logSchema = z.strictObject({
   event: z.string().min(3),
-  description: z.string().optional(),
+  description: z.string().nullable(),
   time: timestampSchema,
 });
 

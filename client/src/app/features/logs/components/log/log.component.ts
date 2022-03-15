@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Log } from '@api/models';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Log, logSchema } from '@api/models';
 import { nameof } from 'ng-toolkit-lib';
 import { FormComponent } from 'src/app/shared/forms/components/form.component';
 
@@ -12,10 +12,12 @@ import { FormComponent } from 'src/app/shared/forms/components/form.component';
 })
 export class LogComponent extends FormComponent<Log> {
   readonly eventControl = new FormControl(null, {
-    validators: [Validators.required, Validators.minLength(3)],
+    validators: [this.zvalidator(logSchema.shape.event)],
   });
 
-  readonly descriptionControl = new FormControl(null);
+  readonly descriptionControl = new FormControl(null, {
+    validators: [this.zvalidator(logSchema.shape.description)],
+  });
 
   readonly form: FormGroup = new FormGroup({
     [nameof<Log>('event')]: this.eventControl,

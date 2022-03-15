@@ -6,10 +6,11 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { Nullable, ObservableUnsubscriber } from 'ng-toolkit-lib';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ZodError, ZodType } from 'zod';
 
 @Directive()
 // eslint-disable-next-line
@@ -84,5 +85,21 @@ export abstract class FormComponent<T> implements OnInit, OnDestroy {
     } else if (confirm('Do you really want to reset the form value?')) {
       runReset();
     }
+  }
+
+  protected zvalidator<P>(
+    z: ZodType<P>,
+  ): (c: AbstractControl) => ValidationErrors | null {
+    return (c: AbstractControl) => {
+      try {
+        z.parse(c.value);
+        return null;
+      } catch (err) {
+        return (err as ZodError)?.errors?.reduce(
+          (prev, cur) => ({ ...prev, [cur.code]: cur }),
+          {},
+        );
+      }
+    };
   }
 }
