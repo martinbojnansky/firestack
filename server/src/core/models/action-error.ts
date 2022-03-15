@@ -2,7 +2,7 @@ import { ActionErrors } from '@api/errors';
 import { UnprocessableEntityException } from '@nestjs/common';
 
 export class ActionError extends UnprocessableEntityException {
-  private readonly errors = [];
+  private readonly errors: any[] = [];
 
   static of<T extends keyof ActionErrors>(key: T, args: ActionErrors[T]) {
     const error = new ActionError();

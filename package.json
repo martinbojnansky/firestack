@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/martinbojnansky/firestack#readme",
   "dependencies": {
-    "yup": "^0.32.11"
+    "zod": "^3.13.4"
   },
   "devDependencies": {
     "cypress": "^9.5.1",

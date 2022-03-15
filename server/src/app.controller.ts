@@ -24,9 +24,9 @@ export class AppController {
       unknown
     >;
     await firstValueFrom(actionService.preAuthorize(request));
-    const payload = await firstValueFrom(actionService.validate(body.payload));
+    await firstValueFrom(actionService.validate(body.payload));
     return response
       .status(HttpStatus.OK)
-      .json(await firstValueFrom(actionService.execute(payload)));
+      .json(await firstValueFrom(actionService.execute(body.payload)));
   }
 }

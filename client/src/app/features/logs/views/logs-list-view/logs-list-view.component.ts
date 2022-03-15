@@ -77,8 +77,7 @@ export class LogsListViewComponent implements OnInit, OnDestroy {
           },
           completed: (log) => {
             this.creatingLog$.next(false);
-            //this.updateLogs();
-            this.logs$.next([log, ...this.logs$.value]);
+            this.logs$.next([log, ...this.logs$.value]); // Or you can call this.updateLogs(); instead.
             this.createLog$.next(null);
           },
           failed: (e) => {

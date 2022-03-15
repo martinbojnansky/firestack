@@ -1,6 +1,5 @@
 import { ActionRole } from '@api/actions';
-import { Log, LogCreate } from '@api/models';
-import { logCreateSchema } from '@api/schemas';
+import { Log, LogCreate, logCreateSchema } from '@api/models';
 import { Injectable } from '@nestjs/common';
 import { Timestamp } from 'firebase-admin/firestore';
 import { from, map, Observable } from 'rxjs';

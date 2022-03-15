@@ -3,12 +3,12 @@ import { ForbiddenException, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
 import { DecodedIdToken, getAuth } from 'firebase-admin/auth';
 import { catchError, from, map, Observable, of } from 'rxjs';
-import { SchemaOf } from 'yup';
+import { ZodType } from 'zod';
 import { ActionError } from '../models/action-error';
 
 export abstract class ActionService<TPayload, TRes> {
   abstract requiredRole: ActionRole;
-  abstract schema: SchemaOf<TPayload> | null;
+  abstract schema: ZodType<TPayload> | undefined;
 
   preAuthorize(request: Request): Observable<void> {
     if (this.requiredRole === null) {
@@ -46,10 +46,7 @@ export abstract class ActionService<TPayload, TRes> {
 
   validate(payload: TPayload): Observable<TPayload> {
     if (this.schema) {
-      return from(this.schema.validate(payload, { strict: true })).pipe(
-        map(
-          () => this.schema.cast(payload, { stripUnknown: true }) as TPayload,
-        ),
+      return from(this.schema.parseAsync(payload)).pipe(
         catchError((err) => {
           throw ActionError.of('invalid', err);
         }),
