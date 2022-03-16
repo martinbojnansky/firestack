@@ -1,0 +1,15 @@
+@import 'global';
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  @include spacing--bottom($gutter);
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: row;
+
+  @include spacing--right($gutter-s);
+}

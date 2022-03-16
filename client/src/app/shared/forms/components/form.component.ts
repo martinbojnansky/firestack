@@ -74,7 +74,7 @@ export abstract class FormComponent<T> implements OnInit, OnDestroy {
 
   reset(confirmation: boolean = true): void {
     const runReset = () => {
-      this.form.reset(this.value$.value, { emitEvent: false });
+      this.form.reset(this.value$.value || {}, { emitEvent: false });
       this.form.markAsPristine();
       this.form.markAsUntouched();
       this.reseted.emit();
@@ -84,6 +84,15 @@ export abstract class FormComponent<T> implements OnInit, OnDestroy {
       runReset();
     } else if (confirm('Do you really want to reset the form value?')) {
       runReset();
+    }
+  }
+
+  getErrorMessage(control: AbstractControl): string | null {
+    if (control.invalid) {
+      const firstError = control.errors?.[Object.keys(control.errors)[0]];
+      return firstError.message || firstError?.toString();
+    } else {
+      return null;
     }
   }
 

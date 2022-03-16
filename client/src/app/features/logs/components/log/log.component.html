@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" class="form">
   <mat-form-field appearance="fill">
     <mat-label>What happened?</mat-label>
     <input
@@ -7,8 +7,8 @@
       placeholder="Ex. I won jackpot"
       value=""
     />
-    <mat-error *ngIf="eventControl.errors?.['too_small']">{{
-      eventControl.errors?.['too_small']?.message
+    <mat-error *ngIf="eventControl.invalid">{{
+      getErrorMessage(eventControl)
     }}</mat-error>
   </mat-form-field>
 
@@ -21,9 +21,8 @@
     ></textarea>
   </mat-form-field>
 
-  <span>
+  <span *ngIf="editable$ | async" class="form-actions">
     <button
-      *ngIf="form.dirty"
       mat-flat-button
       color="accent"
       (click)="save()"
@@ -31,7 +30,12 @@
     >
       Save
     </button>
-    <button *ngIf="form.dirty" mat-flat-button color="accent" (click)="reset()">
+    <button
+      mat-button
+      color="secondary"
+      (click)="reset()"
+      [disabled]="form.pristine"
+    >
       Reset
     </button>
   </span>

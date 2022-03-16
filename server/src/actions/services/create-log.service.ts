@@ -16,9 +16,13 @@ export class CreateLogService extends ActionService<LogCreate, Log> {
   }
 
   execute(payload: LogCreate): Observable<Log> {
+    const now = Timestamp.now();
     const log: Log = {
       ...payload,
-      time: Timestamp.now(),
+      time: {
+        _seconds: now.seconds,
+        _nanoseconds: now.nanoseconds,
+      },
     };
     return from(this.firebaseService.logs.doc().set(log)).pipe(map(() => log));
   }

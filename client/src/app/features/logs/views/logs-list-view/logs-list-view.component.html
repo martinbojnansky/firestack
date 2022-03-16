@@ -18,7 +18,9 @@
         *ngFor="let log of logs$ | async"
         data-tid="logs-list-view__log-item"
       >
-        {{ log.time }}: {{ log.event }}
+        [{{ log.time._seconds * 1000 | date: 'medium' }}]:&nbsp;<b>{{
+          log.event
+        }}</b>
       </mat-list-item>
     </mat-list>
   </div>

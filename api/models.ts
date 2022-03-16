@@ -1,8 +1,8 @@
 import z from 'zod';
 
 export const timestampSchema = z.strictObject({
-  seconds: z.number(),
-  nanoseconds: z.number(),
+  _seconds: z.number(),
+  _nanoseconds: z.number(),
 });
 
 export type Timestamp = z.infer<typeof timestampSchema>;

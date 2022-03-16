@@ -11,12 +11,14 @@ import { FormComponent } from 'src/app/shared/forms/components/form.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogComponent extends FormComponent<Log> {
+  readonly schema = logSchema;
+
   readonly eventControl = new FormControl(null, {
-    validators: [this.zvalidator(logSchema.shape.event)],
+    validators: [this.zvalidator(this.schema.shape.event)],
   });
 
   readonly descriptionControl = new FormControl(null, {
-    validators: [this.zvalidator(logSchema.shape.description)],
+    validators: [this.zvalidator(this.schema.shape.description)],
   });
 
   readonly form: FormGroup = new FormGroup({
