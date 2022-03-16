@@ -7,6 +7,9 @@
       placeholder="Ex. I won jackpot"
       value=""
     />
+    <mat-error *ngIf="eventControl.errors?.['too_small']">{{
+      eventControl.errors?.['too_small']?.message
+    }}</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
